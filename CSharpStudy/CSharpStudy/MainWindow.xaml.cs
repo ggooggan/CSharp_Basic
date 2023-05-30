@@ -25,9 +25,11 @@ namespace CSharpStudy
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        MiniDump _miniDump;
+        private void MiniDump_Click(object sender, RoutedEventArgs e)
         {
-
+            _miniDump = new MiniDump();
+            _miniDump.CallArray();
         }
     }
 }
