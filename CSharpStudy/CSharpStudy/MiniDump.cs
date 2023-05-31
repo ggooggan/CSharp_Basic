@@ -77,11 +77,5 @@ namespace CSharpStudy
                 file.Close();
             }
         }
-
-        int[] test = new int[] { 1, 2 };
-        public void CallArray()
-        {
-            int a = test[200];
-        }
     }
 }

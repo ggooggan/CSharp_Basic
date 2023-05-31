@@ -20,16 +20,18 @@ namespace CSharpStudy
     /// </summary>
     public partial class MainWindow : Window
     {
+        //MiniDump _miniDump;
         public MainWindow()
         {
             InitializeComponent();
+            MiniDump _miniDump = new MiniDump();
+
         }
 
-        MiniDump _miniDump;
         private void MiniDump_Click(object sender, RoutedEventArgs e)
         {
-            _miniDump = new MiniDump();
-            _miniDump.CallArray();
+            ExecuteTest executeTest = new ExecuteTest();
+            executeTest.FailExecute();
         }
     }
 }
