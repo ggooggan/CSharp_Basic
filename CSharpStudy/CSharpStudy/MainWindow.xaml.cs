@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -23,11 +25,11 @@ namespace CSharpStudy
         public MainWindow()
         {
             InitializeComponent();
+
+            string _enumDescription = EnumScore.SCORE01.DescriptionAttr();
+            MessageBox.Show(_enumDescription);
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
+     
     }
 }
