@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -23,11 +24,23 @@ namespace CSharpStudy
         public MainWindow()
         {
             InitializeComponent();
+            AttributeTest();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
+        /*Attribute*/
+        /* https://qzqz.tistory.com/245 */
 
+        private void AttributeTest()
+        {
+            CheckResult("check message");
+        }
+
+        private void CheckResult(string message,
+        [CallerFilePath] string file = "",
+        [CallerLineNumber] int line = 0,
+        [CallerMemberName] string member = "")
+        {
+            Console.WriteLine("{0}(Line:{1}) {2}: {3}", file, line, member, message);
         }
     }
 }
