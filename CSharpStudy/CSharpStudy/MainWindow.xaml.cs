@@ -23,6 +23,22 @@ namespace CSharpStudy
         public MainWindow()
         {
             InitializeComponent();
+            MyClass myClass = new MyClass();
+            myClass.Func();
+
+            Type type = typeof(MyClass);
+            Attribute[] attributes = Attribute.GetCustomAttributes(type);
+
+
+            foreach (var attr in attributes)
+            {
+                History hist = attr as History;
+
+                if(hist != null)
+                {
+                    Console.WriteLine($"version {hist.Version} // programmer {hist.Programmer} // Changes {hist.Changes}");
+                }
+            }
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
