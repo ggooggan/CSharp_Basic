@@ -1,0 +1,648 @@
+{
+  "defaultSquence": {
+    "ADDNEWSAMPLE": {
+      "description": "Parameter recorded when Add new sample is executed.",
+
+      "addnewsampleCheck": {
+        "value": false,
+        "description": "add new sample 수행 여부 확인"
+      },
+
+      "cartridgeBarcode": {
+        "value": 0,
+        "description": "해당 샘플의 Cartridge barcode"
+      },
+
+      "gpCheck": {
+        "value": true,
+        "description": "GP panel"
+      },
+
+      "gnCheck": {
+        "value": false,
+        "description": "GN panel"
+      },
+
+      "mainSlot": {
+        "value": 0,
+        "description": "Main slot 위치"
+      },
+
+      "panelBarcode": {
+        "value": 0,
+        "description": "Panel barcode"
+      },
+
+      "panelSlot": {
+        "value": 0,
+        "description": "panel slot 위치"
+      },
+
+      "panelVer": {
+        "value": "vControl",
+        "description": "Panel type"
+      },
+
+      "qcCheck": {
+        "value": false,
+        "description": "QC 테스트"
+      },
+
+      "sampleBarcode": {
+        "value": false,
+        "description": "Sample barcode"
+      },
+
+      "sampleSlot": {
+        "value": false,
+        "description": "Sample slot 위치"
+      }
+    },
+
+    "PUNCH": {
+      "description": "Parameters to be checked when punching is performed.",
+
+      "punchCheck": {
+        "value": true,
+        "description": "Punch 수행 여부 확인"
+      }
+    },
+
+    "HEATING": {
+      "description": "Variables to be referenced when breaking and cooling the agarose.",
+
+      "heatCheck": {
+        "value": true,
+        "description": "Heating 수행 여부 확인"
+      },
+
+      "high": {
+        "value": [ 130.0, 130.0, 130.0, 130.0, 130.0, 130.0, 130.0, 130.0 ],
+        "description": "끓기 위한 온도 설정 값"
+      },
+
+      "high_standard": {
+        "value": [ 129.0, 129.0, 129.0, 129.0, 129.0, 129.0, 129.0, 129.0 ],
+        "description": "끓는 온도 도달 시점을 지정한 값"
+      },
+
+      "highWaitTime": {
+        "value": [ 10, 10, 10, 10, 10, 10, 10, 10 ],
+        "description": "온도 도달 후, 대기 시간"
+      },
+
+      "low": {
+        "value": [ 0, 0, 0, 0, 0, 0, 0, 0 ],
+        "description": "식히기 위한 온도 설정 값"
+      },
+
+      "low_standard": {
+        "value": [ 38.0, 38.0, 38.2, 38.2, 38.5, 38.5, 38.2, 38.1 ],
+        "description": "식히는 온도 도달 시점 값"
+      },
+
+      "stableTime": {
+        "value": [ 60, 60, 60, 60, 60, 60, 60, 60 ],
+        "description": "각 Sample slot 마다 온도 도달 후, 대기 시간"
+      },
+
+      "stay": {
+        "value": [ 38.2, 38.2, 38.4, 38.4, 38.7, 38.7, 38.4, 38.3 ],
+        "description": "수행 완료 후 대기 시간"
+      }
+    },
+
+    "DISPENSING": {
+      "description": "Parameter recorded when dispensing is executed.",
+
+      "ADP_NormalSpeed": {
+        "value": 50,
+        "description": "ADP 기본 이동 속도 값"
+      },
+
+      "Agar_Dispensing_Put_Ratio": {
+        "value": [ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ],
+        "description": "Agar 분주 수행시 분주량 조절 값 (분주량 * 설정 값)"
+      },
+
+      "Agar_Dispensing_Z": {
+        "value": 0,
+        "description": "Agar 분주 수행 시 ADP Z축 높이 설정"
+      },
+
+      "Agar_Emission_Culture": {
+        "value": false,
+        "description": "버린 웰에 agar 분주 수행을 할지 지정"
+      },
+
+      "Agar_Emission_Vol": {
+        "value": 60,
+        "description": "버린 웰에 agar 분주량"
+      },
+
+      "Agar_Emission_Z": {
+        "value": 0,
+        "description": "버린 웰에 Z축 이동 거리"
+      },
+
+      "Agar_EmissionSpeed": {
+        "value": 10,
+        "description": "버린 웰에 분주 속도"
+      },
+
+      "agardispensingCheck": {
+        "value": true,
+        "description": "Agar 분주 수행 여부 확인"
+      },
+
+      "AgarDispensingSylingeGetSpeed": {
+        "value": [ 1000, 1000, 1000, 1000 ],
+        "description": "Agar 분주 수행 시 흡입 속도"
+      },
+
+      "AgarDispensingSylingePutSpeed": {
+        "value": [ 10, 1000, 1000, 1000 ],
+        "description": "Agar 분주 수행 시 배출 속도"
+      },
+
+      "AgarEmissionDispensingSylingeGetSpeed": {
+        "value": [ 1000, 1000, 1000, 1000 ],
+        "description": "버린 웰 흡입 속도"
+      },
+
+      "AgarEmissionDispensingSylingePutSpeed": {
+        "value": [ 10, 1000, 1000, 1000 ],
+        "description": "버린 웰 배출 속도"
+      },
+
+      "AgarGet_Vol": {
+        "value": 500.0,
+        "description": "Agar 흡입량"
+      },
+
+      "AgarGetWait_Time": {
+        "value": 3,
+        "description": "Agar 흡입시 대기 count"
+      },
+
+      "AgarMix_Num": {
+        "value": 3,
+        "description": "Agar sample mix 수행시 섞는 횟수"
+      },
+
+      "AgarMixGet_Vol": {
+        "value": 650.0,
+        "description": "Agar mix 수행 시, 흡입량"
+      },
+
+      "AgarMixPut_Vol": {
+        "value": 650.0,
+        "description": "Agar mix 수행 시, 배출량"
+      },
+
+      "AgarPut_Vol": {
+        "value": 9.0,
+        "description": "Agar 분주 량"
+      },
+
+      "AgarSampleMix_Num": {
+        "value": 3,
+        "description": "Agar에 Sample mix 횟수"
+      },
+
+      "AgarSampleMix_Vol": {
+        "value": 650.0,
+        "description": "Agar mix 수행 시, 섞을 량"
+      },
+
+      "AgarSylingeGetSpeed": {
+        "value": [ 500, 500, 500, 500 ],
+        "description": "agar에 sample mix시 흡입 속도"
+      },
+
+      "AgarSylingePutSpeed": {
+        "value": [ 10, 500, 500, 500 ],
+        "description": "agar에 sample mix시 배출 속도"
+      },
+
+      "AirGap_Vol": {
+        "value": 100.0,
+        "description": "air gap"
+      },
+
+      "Broth_Dispensing_Z": {
+        "value": 1.0,
+        "description": "Media 분주시 Z 위치"
+      },
+
+      "Broth_Emission_Vol": {
+        "value": 20.0,
+        "description": "버릴 웰의 Media 영역에 분주량"
+      },
+
+      "Broth_Emission_Z": {
+        "value": 0.0,
+        "description": "버릴 웰의 Media 영역 분주시 Z축 위치"
+      },
+
+      "brothdispensingCheck": {
+        "value": true,
+        "description": "Media 분주 수행 여부"
+      },
+
+      "BrothDispensingSylingeGetSpeed": {
+        "value": [ 1000, 1000, 1000, 1000 ],
+        "description": "Media container의 Media 흡입 속도"
+      },
+
+      "BrothDispensingSylingePutSpeed": {
+        "value": [ 10, 1000, 1000, 1000 ],
+        "description": "Media 배출 시 속도"
+      },
+
+      "BrothGet_Vol": {
+        "value": 800.0,
+        "description": "Media 분주하기 위한 흡입량"
+      },
+
+      "BrothPut_Vol": {
+        "value": 90.0,
+        "description": "Meida 분주 량"
+      },
+
+      "BrothSylingeGetSpeed": {
+        "value": [ 500, 500, 500, 500 ],
+        "description": "Media container의 Media 배출 속도"
+      },
+
+      "BrothSylingePutSpeed": {
+        "value": [ 10, 500, 500, 500 ],
+        "description": "Media 분주 시, Media 배출 속도"
+      },
+
+      "Container_Z": {
+        "value": 25.0,
+        "description": "Container에서 Z축 이동 거리"
+      },
+
+      "ContainerWait_Time": {
+        "value": 1,
+        "description": "Container에서 흡입 후 대기 count"
+      },
+
+      "Dispense_per_pulse": {
+        "value": 40,
+        "description": "1 pulse 당 량의 비율 (ul)"
+      },
+
+      "dispensingCheck": {
+        "value": true,
+        "description": "분주 수행 여부 확인"
+      },
+
+      "DispensingWait_Time": {
+        "value": 1,
+        "description": "분주 수행 시, 대기 count"
+      },
+
+      "Emission_Check": {
+        "value": 1,
+        "description": "어디에 샘플을 버릴 지 지정 (0: 특수 위치 1: 첫번째 웰 (Agar, Media) 2: 첫번째 웰 (Agar)"
+      },
+
+      "InitialEmission_Vol": {
+        "value": 0.0,
+        "description": "이동 시, 샘플을 흘리지 않기 위한 흡입 량 (Air)"
+      },
+
+      "Panel_DispensingSpeed": {
+        "value": 10,
+        "description": "분주 수행 시, ADP 이동 속도"
+      },
+
+      "PostCooling": {
+        "value": true,
+        "description": "Post cooling 사용 여부"
+      },
+
+      "PostCooling_Time": {
+        "value": 180,
+        "description": "Post cooling 시간"
+      },
+
+      "PreCooling_Time": {
+        "value": 180,
+        "description": "Pre cooling 시간"
+      },
+
+      "SampleAgarSylingeGetSpeed": {
+        "value": [ 1000, 1000, 1000, 1000 ],
+        "description": "Sample를 Agar contianer에 섞을 시, 흡입 속도"
+      },
+
+      "SampleAgarSylingePutSpeed": {
+        "value": [ 10, 1000, 1000, 1000 ],
+        "description": "Sample를 Agar contianer에 섞을 시, 배출 속도"
+      },
+
+      "SampleLoad_Bias_Vol": {
+        "value": 0.0,
+        "description": "Sample 흡입시, 추가 흡입량"
+      },
+
+      "SampleLoadGN_Vol": {
+        "value": 147.0,
+        "description": "gn sample 흡입량"
+      },
+
+      "SampleLoadGN_Vol_QC": {
+        "value": 147.0,
+        "description": "gn qc sample 흡입량"
+      },
+
+      "SampleLoadGP_Vol": {
+        "value": 147.0,
+        "description": "gp sample 흡입량"
+      },
+
+      "SampleLoadGP_Vol_QC": {
+        "value": 147.0,
+        "description": "gp qc sample 흡입량"
+      },
+
+      "SampleShake_Num": {
+        "value": 3,
+        "description": "sample mix 횟수"
+      },
+
+      "SampleShake_Vol": {
+        "value": 200.0,
+        "description": "sample mix 량"
+      },
+
+      "SampleShake_Zup": {
+        "value": 20,
+        "description": "Sample Mix 동작 후, z축 이동 거리"
+      },
+
+      "SampleShakeWait_Time": {
+        "value": 1,
+        "description": "Sample mix 후, 대기 count"
+      },
+
+      "SampleSylingeGetSpeed": {
+        "value": [ 1000, 1000, 1000, 1000 ],
+        "description": "Sample 획득 속도"
+      },
+
+      "SampleSylingePutSpeed": {
+        "value": [ 10, 1000, 1000, 1000 ],
+        "description": "Sample 배출 속도"
+      },
+
+      "Syringe_Speed_Get": {
+        "value": 10,
+        "description": "흡입 시, syringe 속도 (사용 안함)"
+      },
+
+      "Syringe_Speed_Put": {
+        "value": 10,
+        "description": "배출 시, syringe 속도 (사용 안함)"
+      },
+
+      "TipAlign": {
+        "value": false,
+        "description": "Tip aligner 수행 여부 확인"
+      }
+    },
+
+    "IMAGE": {
+      "description": "Parameter recorded when imaging is executed.",
+
+      "focusMark_down": {
+        "value": [ 4, 5 ],
+        "description": "Focus 획득 하기 위한 최저 z 위치 값 (z1, z2)"
+      },
+
+      "focusMark_up": {
+        "value": [ 8, 8 ],
+        "description": "Focus 획득 하기 위한 최대 z 위치 값 (z1, z2)"
+      },
+
+      "force_imageCheck": {
+        "value": true,
+        "description": "이미지 및 Manula 동작 수행 여부"
+      },
+
+      "Image_Save": {
+        "value": true,
+        "description": "이미지 저장 여부"
+      },
+
+      "imageCheck": {
+        "value": true,
+        "description": "이미지 동작 수행 여부"
+      },
+
+      "Lock": {
+        "value": 75,
+        "description": "Stage에 Panel 고정하는 토크 값"
+      },
+
+      "Module": {
+        "value": "VIEWORKS",
+        "description": "Camera module"
+      },
+
+      "Num_ImagePos": {
+        "value": 1,
+        "description": "image position 개수 (사용 안함)"
+      },
+
+      "Num_ImagingRound": {
+        "value": 10,
+        "description": "image round 수"
+      },
+
+      "Num_ImagingRound_QC": {
+        "value": 17,
+        "description": "QC image round 수"
+      },
+
+      "Num_ReportingRound_GN": {
+        "value": 10,
+        "description": "리포트 출력 조건인 round 수 (GN)"
+      },
+
+      "Num_ReportingRound_GN_QC": {
+        "value": 13,
+        "description": "리포트 출력 조건인 round 수 (GN, QC)"
+      },
+
+      "Num_ReportingRound_GP": {
+        "value": 10,
+        "description": "리포트 출력 조건인 round 수 (GP)"
+      },
+
+      "Num_ReportingRound_GP_QC": {
+        "value": 13,
+        "description": "리포트 출력 조건인 round 수 (GP, QC)"
+      },
+
+      "OPLEDA": {
+        "value": 53,
+        "description": "Camera 1의 LED 밝기 설정 값"
+      },
+
+      "OPLEDB": {
+        "value": 55,
+        "description": "Camera 3의 LED 밝기 설정 값"
+      },
+
+      "Optic1_Exposure": {
+        "value": 2500,
+        "description": "Camera 1의 exposure time"
+      },
+
+      "Optic1_Gain": {
+        "value": 0,
+        "description": "camera 1의 gian 값"
+      },
+
+      "Optic1_GrayTarget": {
+        "value": 160,
+        "description": "camera 1의 목표 gray 값"
+      },
+
+      "Optic1_matchTH": {
+        "value": 6000000,
+        "description": "camera 1의 목표 thread 값"
+      },
+
+      "Optic2_Exposure": {
+        "value": 2500,
+        "description": "camera 2의 exposure time"
+      },
+
+      "Optic2_Gain": {
+        "value": 0,
+        "description": "camera 2의 gian 값"
+      },
+
+      "Optic2_GrayTarget": {
+        "value": 160,
+        "description": "camera 2의 목표 gray 값"
+      },
+
+      "Optic2_matchTH": {
+        "value": 6000000,
+        "description": "camera 2의 목표 thread 값"
+      },
+
+      "PORT1": {
+        "value": "COM20",
+        "description": "vieworks port 1"
+      },
+
+      "PORT2": {
+        "value": "COM21",
+        "description": "vieworks port 2"
+      },
+
+      "Report_Check": {
+        "value": true,
+        "description": "report 출력 여부"
+      },
+
+      "Save_Focus": {
+        "value": true,
+        "description": "focus 이미지 저장 여부"
+      },
+
+      "Save_FocusMark": {
+        "value": 1,
+        "description": "focus 영역 개수 설정 (사용 안함)"
+      },
+
+      "Stage_FocusMarkPos": {
+        "value": [ 60.918, 64.745, 4.374, 5.683 ],
+        "description": "첫번째 focus 마크 위치 (x, y, z1, z2)"
+      },
+
+      "Stage_FocusSpeedMax": {
+        "value": 10,
+        "description": "focus 찾을 시, 최대 속도"
+      },
+
+      "Stage_FocusSpeedMin": {
+        "value": 1,
+        "description": "focus 찾을 시, 최저 속도"
+      },
+
+      "Stage_FocusZdownSpeed": {
+        "value": 1,
+        "description": "focus 수행시 z축 아래 이동 스피드"
+      },
+
+      "Stage_FocusZupSpeed": {
+        "value": 1,
+        "description": "focus 수행시 z축 위 이동 스피드"
+      },
+
+      "Stage_ImagePos1": {
+        "value": [ -3.85, 1.35, 1.8, 1.8 ],
+        "description": "첫번째 이미지 위치 (x, y, z1, z2)"
+      },
+
+      "Stage_ImagePos2": {
+        "value": [ -3.155, 2.045, 1.8, 1.8 ],
+        "description": "두번째 이미지 위치 (x, y, z1, z2)"
+      },
+
+      "Stage_ImagePos3": {
+        "value": [ -4.545, 0.655, 1.8, 1.8 ],
+        "description": "세번째 이미지 위치 (x, y, z1, z2)"
+      },
+
+      "Stage_ImagePos4": {
+        "value": [ 0.0, 0.0, 0.0, 0.0 ],
+        "description": "네번째 이미지 위치 (x, y, z1, z2)"
+      },
+
+      "Stage_ImagePos5": {
+        "value": [ 0.0, 0.0, 0.0, 0.0 ],
+        "description": "다섯번째 이미지 위치 (x, y, z1, z2)"
+      },
+
+      "Stage_ImagePos6": {
+        "value": [ 0.0, 0.0, 0.0, 0.0 ],
+        "description": "여섯번째 이미지 위치 (x, y, z1, z2)"
+      },
+
+      "Stage_Speed": {
+        "value": 100,
+        "description": "Stage 기본 일반 속도 값"
+      },
+
+      "Stage_ZstackMax": {
+        "value": 0.6,
+        "description": "이미지 단계별 z축 이동 거리 (mm)"
+      },
+
+      "Stage_ZstackStep": {
+        "value": 1,
+        "description": "z축 이동 횟수"
+      },
+
+      "Time_ImagingInterval": {
+        "value": 60,
+        "description": "이미지 획득 간 시간차이 (min)"
+      },
+
+      "Well_Diff": {
+        "value": 9,
+        "description": "well 간 거리 (mm)"
+      }
+    }
+  }
+}
