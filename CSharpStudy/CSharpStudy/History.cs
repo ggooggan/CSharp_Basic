@@ -19,7 +19,6 @@ namespace CSharpStudy
             Version = 1.0;
             Changes = "First release";
         }
-
         public string Programmer => programmer;
     }
 }
