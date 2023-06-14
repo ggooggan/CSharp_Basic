@@ -1,4 +1,5 @@
 # CSharp_Basic
 
-- 비동기 강의 </br>
-https://youtu.be/gKViaL0V-2s </br>
+## IOptions pattern
+
+JSON 을 연결하기 위해서 .NET에서 제공하는 pattern에 대해서 확인   
