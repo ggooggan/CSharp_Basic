@@ -59,10 +59,10 @@ public class DBConextStudy
             //bool created =  context.Database.EnsureCreated();
 
 
-            //// 학과 추가
-            //var department = new Department { Name = "Computer Science" };
-            //context.Departments.Add(department);
-            //context.SaveChanges();
+            // 학과 추가
+            var department = new Department { Name = "Computer Science" };
+            context.Departments.Add(department);
+            context.SaveChanges();
 
             // 학생 추가
             var student = new Student
