@@ -75,10 +75,14 @@ public class DBConextStudy
             context.Students.Add(student);
             context.SaveChanges();
 
+            var updateField = context.Students.Find(1);
+            updateField.Age = 150;
+            context.SaveChanges();
+
             // 학생 정보 조회
             var retrievedStudent = context.Students
-                .Include(s => s.Department) // 내비게이션 속성을 로드하기 위해 Include 사용
-                .FirstOrDefault();
+            .Include(s => s.Department) // 내비게이션 속성을 로드하기 위해 Include 사용
+            .FirstOrDefault();
 
             Console.WriteLine($"Student Name: {retrievedStudent?.FirstName} {retrievedStudent?.LastName}");
             Console.WriteLine($"Department: {retrievedStudent.Department.Name}");
