@@ -1,7 +1,5 @@
 ﻿#define firstTEST1
 
-using Microsoft.EntityFrameworkCore;
-using ModelBuilderStudy.Model2;
 
 #if firstTEST
 using (Classes db = new())
@@ -38,5 +36,12 @@ Score _score1 = new Score() { ScoreId = 15, ScoreName = "Z1231" };
 _db.Add(_score1);
 await _db.SaveChangesAsync();
 #else
+
+
 DBConextStudy _dBConextStudy = new DBConextStudy();
+
+Console.WriteLine("input option:");
+string input = Console.ReadLine();
+
+_dBConextStudy.ReadDBFile();
 #endif

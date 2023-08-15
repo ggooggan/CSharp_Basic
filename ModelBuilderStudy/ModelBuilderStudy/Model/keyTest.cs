@@ -52,13 +52,13 @@ public class DBConextStudy
     {
         using (var context = new ApplicationDbContext())
         {
-            ////기존 DB가 존재할 경우 삭제
-            //bool deleted =  context.Database.EnsureDeleted();
+            //기존 DB가 존재할 경우 삭제
+            bool deleted = context.Database.EnsureDeleted();
 
-            ////Model로 부터 DB를 만들고 필요한 SQL Script를 생성
-            //bool created =  context.Database.EnsureCreated();
+            //Model로 부터 DB를 만들고 필요한 SQL Script를 생성
+            bool created = context.Database.EnsureCreated();
 
-
+            
             // 학과 추가
             var department = new Department { Name = "Computer Science" };
             context.Departments.Add(department);
@@ -86,6 +86,28 @@ public class DBConextStudy
 
             Console.WriteLine($"Student Name: {retrievedStudent?.FirstName} {retrievedStudent?.LastName}");
             Console.WriteLine($"Department: {retrievedStudent.Department.Name}");
+        }
+
+    }
+
+
+    public void ReadDBFile()
+    {
+        using (var context = new ApplicationDbContext())
+        {
+            // 학생 정보 조회
+            var retrievedStudent = context.Students
+            .Include(s => s.Department); // 내비게이션 속성을 로드하기 위해 Include 사용
+
+
+            Console.WriteLine("다시 읽기");
+            foreach (var value in retrievedStudent)
+            {
+                Console.WriteLine(value.FirstName); 
+                Console.WriteLine(value.LastName);
+            }
+            Console.WriteLine("끝");
+
         }
 
     }
