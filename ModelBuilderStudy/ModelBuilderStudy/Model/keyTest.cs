@@ -48,21 +48,22 @@ public class ApplicationDbContext : DbContext
 
 public class DBConextStudy
 {
+    ApplicationDbContext _context = new ApplicationDbContext();
+
     public DBConextStudy()
     {
-        using (var context = new ApplicationDbContext())
         {
             //기존 DB가 존재할 경우 삭제
-            bool deleted = context.Database.EnsureDeleted();
+            bool deleted = _context.Database.EnsureDeleted();
 
             //Model로 부터 DB를 만들고 필요한 SQL Script를 생성
-            bool created = context.Database.EnsureCreated();
+            bool created = _context.Database.EnsureCreated();
 
             
             // 학과 추가
             var department = new Department { Name = "Computer Science" };
-            context.Departments.Add(department);
-            context.SaveChanges();
+            _context.Departments.Add(department);
+            _context.SaveChanges();
 
             // 학생 추가
             var student = new Student
@@ -72,15 +73,15 @@ public class DBConextStudy
                 Age = 20,
                 DepartmentId = department.DepartmentID // 학생을 위에서 추가한 학과에 소속시킴
             };
-            context.Students.Add(student);
-            context.SaveChanges();
+            _context.Students.Add(student);
+            _context.SaveChanges();
 
-            var updateField = context.Students.Find(1);
+            var updateField = _context.Students.Find(1);
             updateField.Age = 150;
-            context.SaveChanges();
+            _context.SaveChanges();
 
             // 학생 정보 조회
-            var retrievedStudent = context.Students
+            var retrievedStudent = _context.Students
             .Include(s => s.Department) // 내비게이션 속성을 로드하기 위해 Include 사용
             .FirstOrDefault();
 
@@ -93,10 +94,11 @@ public class DBConextStudy
 
     public void ReadDBFile()
     {
-        using (var context = new ApplicationDbContext())
         {
+            _context.Students.Load();
+
             // 학생 정보 조회
-            var retrievedStudent = context.Students
+            var retrievedStudent = _context.Students
             .Include(s => s.Department); // 내비게이션 속성을 로드하기 위해 Include 사용
 
 
