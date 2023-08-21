@@ -113,6 +113,20 @@ namespace Master
             {
                 bool deleted = context.Database.EnsureDeleted();
                 bool created = context.Database.EnsureCreated();
+
+                // Find the Type with Num value 3
+                Type type3 = context.Types.FirstOrDefault(t => t.Num == 1);
+
+                if (type3 != null)
+                {
+                    Slot slot = new Slot() { InputData = "1231", TypeId = type3.Num, Num = 9 };
+                    context.Add(slot);
+                    context.SaveChanges();
+                }
+                else
+                {
+                    Console.WriteLine("Type with Num 3 not found.");
+                }
             }
         }
     }
