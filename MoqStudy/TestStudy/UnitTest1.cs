@@ -122,7 +122,7 @@ namespace TestStudy
 
             IFoo foo = mock.Object;
             var a = foo.DoSomething(1, "ping");
-
+             
             Assert.IsTrue(a);
         }
     }
