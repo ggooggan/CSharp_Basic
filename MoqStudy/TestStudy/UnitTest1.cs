@@ -10,8 +10,9 @@ namespace TestStudy
         public void Test01()
         {
             var mock = new Mock<IFoo>();
-            mock.Setup(foo => foo.DoSomething("ping")).Returns(true);
+            IFoo foo = mock.Object;
 
+            mock.Setup(foo => foo.DoSomething("ping")).Returns(true);
 
             // out arguments
             var outString = "ack";
@@ -31,7 +32,11 @@ namespace TestStudy
             // access invocation arguments when returning a value
             // 값을 반환할 때 호출 인수에 액세스
             mock.Setup(x => x.DoSomethingStringy(It.IsAny<string>()))
-                    .Returns((string s) => s.ToLower());
+                    .Returns((string s) => s.ToUpper());
+
+           
+            string result = foo.DoSomethingStringy("adsf");
+
             // Multiple parameters overloads available
             // 여러 매개변수 오버로드 가능
 
