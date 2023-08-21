@@ -18,11 +18,14 @@ namespace TestStudy
 
             int result = calculator.Add(2, 3);
             Assert.AreEqual(5, result);
-            //// Act
-            //Calculator calculator1 = new Calculator();
-            //int result = calculator1.Test(calculator, 3, 5);
+            // Act
+            var addMoc111k = new Mock<Calculator>();
 
-            //// Assert
+            //Calculator calculator1 = new Calculator();
+            addMoc111k.Object.Test(calculator, 1, 1);
+            addMoc111k.Verify(ad => ad.Test(calculator, 1, 1));
+
+            // Assert
             //Assert.AreEqual(8, result);
         }
     }
