@@ -1,5 +1,7 @@
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using MoqStudy;
+using System.Text.RegularExpressions;
 
 namespace TestStudy
 {
@@ -34,7 +36,7 @@ namespace TestStudy
             mock.Setup(x => x.DoSomethingStringy(It.IsAny<string>()))
                     .Returns((string s) => s.ToUpper());
 
-           
+
             string result = foo.DoSomethingStringy("adsf");
 
             // Multiple parameters overloads available
@@ -55,6 +57,73 @@ namespace TestStudy
             // async methods (see below for more about async):
             // 비동기 메서드(비동기에 대한 자세한 내용은 아래 참조):
             mock.Setup(foo => foo.DoSomethingAsync().Result).Returns(true);
+        }
+
+        [TestMethod]
+        public void MatchingTest()
+        {
+            var mock = new Mock<IFoo>();
+
+            //// any value
+            //mock.Setup(foo => foo.DoSomething(It.IsAny<string>())).Returns(true);
+
+            //// any value passed in a `ref` parameter (requires Moq 4.8 or later):
+            //mock.Setup(foo => foo.Submit(ref It.Ref<Bar>.IsAny)).Returns(true);
+
+            //// matching Func<int>, lazy evaluated
+            //mock.Setup(foo => foo.Add(It.Is<int>(i => i % 2 == 0))).Returns(true);
+
+            //// matching ranges
+            //mock.Setup(foo => foo.Add(It.IsInRange<int>(0, 10, Range.Inclusive))).Returns(true);
+
+            // matching regex
+            mock.Setup(x => x.DoSomethingStringy(It.IsRegex("[a-d]+", RegexOptions.IgnoreCase))).Returns("foo");
+
+            IFoo foo = mock.Object;
+
+            var a = foo.DoSomethingStringy("eeeeee");
+
+            Assert.Equals("foo", a);
+        }
+
+        [TestMethod]
+        public void CallbackTest()
+        {
+            var mock = new Mock<IFoo>();
+            var calls = 0;
+            var callArgs = new List<string>();
+
+            mock.Setup(foo => foo.DoSomething("ping"))
+                .Callback(() => calls++)
+                .Returns(true);
+
+            // access invocation arguments
+            mock.Setup(foo => foo.DoSomething(It.IsAny<string>()))
+                .Callback((string s) => callArgs.Add(s))
+                .Returns(true);
+
+            // alternate equivalent generic method syntax
+            mock.Setup(foo => foo.DoSomething(It.IsAny<string>()))
+                .Callback<string>(s => callArgs.Add(s))
+                .Returns(true);
+
+            // access arguments for methods with multiple parameters
+            mock.Setup(foo => foo.DoSomething(It.IsAny<int>(), It.IsAny<string>()))
+                .Callback<int, string>((i, s) => callArgs.Add(i.ToString()))
+                .Returns(true)
+                .Callback<int, string>((i, s) => callArgs.Add((i+100).ToString()));
+
+
+            //// callbacks can be specified before and after invocation
+            //mock.Setup(foo => foo.DoSomething("ping"))
+            //    .Callback(() => Console.WriteLine("Before returns"))
+            //    .Returns(true)
+            //    .Callback(() => Console.WriteLine("After returns"));
+
+            IFoo foo = mock.Object;
+            var a = foo.DoSomething(1, "ping");
+
+            Assert.IsTrue(a);
         }
     }
 }
