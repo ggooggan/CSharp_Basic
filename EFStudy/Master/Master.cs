@@ -4,34 +4,36 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.IO;
+using System.Xml;
 
 namespace Master
 {
-    [Table("SlotTable")]
-    public class Slot
+
+    public class InputName
     {
         [Key]
         public int Num { get; set; }
 
         public string InputData { get; set; }
 
-        public int TypeId { get; set; } // Foreign key property
+        public InputType InputType { get; set; }
 
-        [ForeignKey("TypeId")]
-        public Type Type { get; set; }
+        [ForeignKey("Result")]
+        public int ResultFK { get; set; }
+
+        public Result Result { get; set; }
     }
 
-    [Table("TypeTable")]
-    public class Type
+    public class InputType
     {
         [Key]
         public int Num { get; set; }
 
         public string Gram { get; set; }
 
-        public ICollection<Slot>? Slots { get; set; }
-
-        // Remove Result property from Type
+        [ForeignKey(nameof(InputName))]
+        public int InputNameId { get; set; }
+        public InputName InputName { get; set; }
     }
 
     public class Result
@@ -41,18 +43,17 @@ namespace Master
 
         public string ResultData { get; set; }
 
-        public int TypeId { get; set; } // Foreign key property
-
-        [ForeignKey("TypeId")]
-        public Type Type { get; set; }
+        [ForeignKey("InputType")]
+        public int InputTypeNum { get; set; } // 외래키
+        public InputType InputType { get; set; } // 네비게이터
     }
 
     public class TotalClass : DbContext
     {
         // DbSet
-        public DbSet<Slot> Slots { get; set; }
+        public DbSet<InputName> InputNames { get; set; }
+        public DbSet<InputType> InputTypes { get; set; }
         public DbSet<Result> Results { get; set; }
-        public DbSet<Type> Types { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -62,41 +63,32 @@ namespace Master
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Slot>().HasData(
-                new Slot() { Num = 1, InputData = "1", TypeId = 1 },
-                new Slot() { Num = 2, InputData = "2", TypeId = 2 },
-                new Slot() { Num = 3, InputData = "3", TypeId = 13 }
+            modelBuilder.Entity<InputName>().HasData(
+                new InputName() { Num = 1, InputData = "1", ResultFK = 1 },
+                new InputName() { Num = 2, InputData = "2", ResultFK = 3 },
+                new InputName() { Num = 3, InputData = "3", ResultFK = 2 }
             );
 
-            modelBuilder.Entity<Type>().HasData(
-                new Type() { Num = 1, Gram = "GN" },
-                new Type() { Num = 2, Gram = "GP" },
-                new Type() { Num = 13, Gram = "GN" }
+            modelBuilder.Entity<InputType>().HasData(
+                new InputType() { Num = 1, Gram = "GN", InputNameId = 1 },
+                new InputType() { Num = 2, Gram = "GP", InputNameId = 2 },
+                new InputType() { Num = 3, Gram = "GN", InputNameId = 3 }
             );
 
             modelBuilder.Entity<Result>().HasData(
-                new Result() { Num = 1, ResultData = "Complete", TypeId = 1 },
-                new Result() { Num = 2, ResultData = "Broth", TypeId = 2 },
-                new Result() { Num = 3, ResultData = "Heating", TypeId = 13 }
+                new Result() { Num = 1, ResultData = "Complete", InputTypeNum = 1 },
+                new Result() { Num = 2, ResultData = "Broth", InputTypeNum = 2 },
+                new Result() { Num = 3, ResultData = "Heating", InputTypeNum = 3 }
             );
 
-            modelBuilder.Entity<Slot>()
-                .HasOne(s => s.Type)
-                .WithMany(t => t.Slots);
+            //modelBuilder.Entity<InputType>()
+            //    .HasOne(ipt => ipt.InputName)
+            //    .WithOne(ipn => ipn.InputType);
 
-            modelBuilder.Entity<Slot>()
-                .HasOne(s => s.Type)
-                .WithMany(t => t.Slots)
-                .HasForeignKey(s => s.TypeId) // Explicitly define the foreign key property
+            //modelBuilder.Entity<Result>()
+            //    .HasOne(r => r.InputType)
+            //    .WithOne();
 
-                .IsRequired(); // Indicate that the foreign key is required
-
-            modelBuilder.Entity<Result>()
-                .HasOne(r => r.Type)
-                .WithMany()
-                .HasForeignKey(r => r.TypeId) // Explicitly define the foreign key property
-
-                .IsRequired(); // Indicate that the foreign key is required
         }
     }
 
@@ -113,20 +105,6 @@ namespace Master
             {
                 bool deleted = context.Database.EnsureDeleted();
                 bool created = context.Database.EnsureCreated();
-
-                // Find the Type with Num value 3
-                Type type3 = context.Types.FirstOrDefault(t => t.Num == 1);
-
-                if (type3 != null)
-                {
-                    Slot slot = new Slot() { InputData = "1231", TypeId = type3.Num, Num = 9 };
-                    context.Add(slot);
-                    context.SaveChanges();
-                }
-                else
-                {
-                    Console.WriteLine("Type with Num 3 not found.");
-                }
             }
         }
     }
