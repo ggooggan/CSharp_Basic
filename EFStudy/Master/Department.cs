@@ -44,6 +44,48 @@ namespace YourNamespace
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            // Department 추가
+            var department01 = new Department
+            {
+                Name = "Computer Science",
+                DepartmentID = 1
+            };
+            var department02 = new Department
+            {
+                Name = "Out Side Science",
+                DepartmentID = 2
+            };
+
+            var student01 = new Student
+            {
+                StudentID = 1,
+                FirstName = "John",
+                LastName = "Doe",
+                Age = 20,
+                DepartmentId = department01.DepartmentID // 외래 키 설정
+            };
+
+            var student02 = new Student
+            {
+                StudentID = 2,
+                FirstName = "Jane",
+                LastName = "Smith",
+                Age = 22,
+                DepartmentId = department01.DepartmentID // 외래 키 설정
+            };
+
+            var student03 = new Student
+            {
+                StudentID = 3,
+                FirstName = "Jane",
+                LastName = "Smith",
+                Age = 22,
+                DepartmentId = department02.DepartmentID // 외래 키 설정
+            };
+
+            modelBuilder.Entity<Department>().HasData(department01, department02);
+            modelBuilder.Entity<Student>().HasData(student01, student02, student03);
+
             modelBuilder.Entity<Student>()
                 .HasOne(s => s.Department)
                 .WithMany(d => d.Students)
@@ -60,48 +102,7 @@ namespace YourNamespace
                 context.Database.EnsureDeleted();
                 context.Database.EnsureCreated();
 
-                // Department 추가
-                var department = new Department
-                {
-                    Name = "Computer Science"
-                };
-                context.Departments.Add(department);
-                var department01 = new Department
-                {
-                    Name = "Out Side Science"
-                };
-                context.Departments.Add(department01);
-
-
-                // Student 추가
-                var student1 = new Student
-                {
-                    FirstName = "John",
-                    LastName = "Doe",
-                    Age = 20,
-                    Department = department // 외래 키 설정
-                };
-                context.Students.Add(student1);
-
-                var student2 = new Student
-                {
-                    FirstName = "Jane",
-                    LastName = "Smith",
-                    Age = 22,
-                    Department = department // 외래 키 설정
-                };
-                context.Students.Add(student2);
-
-                var student3 = new Student
-                {
-                    FirstName = "Jane",
-                    LastName = "Smith",
-                    Age = 22,
-                    Department = department01 // 외래 키 설정
-                };
-                context.Students.Add(student3);
-
-                context.SaveChanges();
+                
             }
         }
     }
