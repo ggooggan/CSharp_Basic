@@ -41,6 +41,14 @@ namespace YourNamespace
             string databasePath = Path.Combine(Environment.CurrentDirectory, "school.db");
             optionsBuilder.UseSqlite($"Data Source={databasePath}");
         }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Student>()
+                .HasOne(s => s.Department)
+                .WithMany(d => d.Students)
+                .HasForeignKey(s => s.DepartmentId);
+        }
     }
 
     class Program
