@@ -58,6 +58,12 @@ namespace YourNamespace
                     Name = "Computer Science"
                 };
                 context.Departments.Add(department);
+                var department01 = new Department
+                {
+                    Name = "Out Side Science"
+                };
+                context.Departments.Add(department01);
+
 
                 // Student 추가
                 var student1 = new Student
@@ -77,6 +83,15 @@ namespace YourNamespace
                     Department = department // 외래 키 설정
                 };
                 context.Students.Add(student2);
+
+                var student3 = new Student
+                {
+                    FirstName = "Jane",
+                    LastName = "Smith",
+                    Age = 22,
+                    Department = department01 // 외래 키 설정
+                };
+                context.Students.Add(student3);
 
                 context.SaveChanges();
             }
