@@ -64,11 +64,6 @@ namespace Master
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //modelBuilder.Entity<InputName>().HasData(
-            //    new InputName() { Num = 1, InputData = "1", ResultFK = 1 },
-            //    new InputName() { Num = 2, InputData = "2", ResultFK = 3 },
-            //    new InputName() { Num = 3, InputData = "3", ResultFK = 2 }
-            //);
 
             modelBuilder.Entity<InputName>().HasData(
                new InputName() { Num = 1, InputData = "1" },
@@ -85,19 +80,26 @@ namespace Master
             modelBuilder.Entity<Result>().HasData(
                 new Result() { Num = 1, ResultData = "Complete", InputTypeNum = 1 },
                 new Result() { Num = 2, ResultData = "Broth", InputTypeNum = 2 },
-                new Result() { Num = 3, ResultData = "Heating", InputTypeNum = 3 }
+                new Result() { Num = 3, ResultData = "Heating", InputTypeNum = 13 }
             );
 
-            //modelBuilder.Entity<InputType>()
-            //    .HasOne(ipt => ipt.InputName)
-            //    .WithOne(ipn => ipn.InputType);
+            // ---
+            modelBuilder.Entity<InputName>()
+               .HasOne(ipn => ipn.InputType)
+               .WithOne(ipt => ipt.InputName);
 
-            //modelBuilder.Entity<Result>()
-            //    .HasOne(r => r.InputType)
-            //    .WithOne();
+            modelBuilder.Entity<InputType>()
+                .HasOne(ipt => ipt.InputName)
+                .WithOne(ipn => ipn.InputType);
+            //---
 
+            modelBuilder.Entity<InputType>()
+              .HasOne(ipt => ipt.Result)
+              .WithOne(r => r.InputType);
 
-            
+            modelBuilder.Entity<Result>()
+             .HasOne(r => r.InputType)
+             .WithOne(ipt => ipt.Result);
         }
     }
 
