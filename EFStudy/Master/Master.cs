@@ -80,7 +80,7 @@ namespace Master
             modelBuilder.Entity<Result>().HasData(
                 new Result() { Num = 1, ResultData = "Complete", InputTypeNum = 1 },
                 new Result() { Num = 2, ResultData = "Broth", InputTypeNum = 2 },
-                new Result() { Num = 3, ResultData = "Heating", InputTypeNum = 13 }
+                new Result() { Num = 3, ResultData = "Heating", InputTypeNum = 3 }
             );
 
             // ---
