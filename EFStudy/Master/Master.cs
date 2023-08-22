@@ -16,11 +16,10 @@ namespace Master
 
         public string? InputData { get; set; }
 
-        public InputType? InputType { get; set; }
+        [ForeignKey("InputType")]
+        public int InputTypeNum { get; set; }
 
-        //[ForeignKey("Result")]
-        //public int ResultFK { get; set; }
-        //public Result Result { get; set; }
+        public InputType InputType { get; set; }
     }
 
     public class InputType
@@ -30,31 +29,17 @@ namespace Master
 
         public string? Gram { get; set; }
 
-        [ForeignKey(nameof(InputName))]
+        [ForeignKey("InputName")]
         public int InputNameId { get; set; }
-        public InputName? InputName { get; set; }
-
-        public Result Result { get; set; }
+        public ICollection<InputName>? InputNames { get; set; }
     }
 
-    public class Result
-    {
-        [Key]
-        public int Num { get; set; }
-
-        public string? ResultData { get; set; }
-
-        [ForeignKey("InputType")]
-        public int InputTypeNum { get; set; } // 외래키
-        public InputType? InputType { get; set; } // 네비게이터
-    }
 
     public class TotalClass : DbContext
     {
         // DbSet
         public DbSet<InputName> InputNames { get; set; }
         public DbSet<InputType> InputTypes { get; set; }
-        public DbSet<Result> Results { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -66,40 +51,26 @@ namespace Master
         {
 
             modelBuilder.Entity<InputName>().HasData(
-               new InputName() { Num = 1, InputData = "1" },
-               new InputName() { Num = 2, InputData = "2" },
-               new InputName() { Num = 3, InputData = "3" }
+               new InputName() { Num = 1, InputData = "1", InputTypeNum = 1 },
+               new InputName() { Num = 2, InputData = "2", InputTypeNum = 2 },
+               new InputName() { Num = 3, InputData = "3", InputTypeNum = 3 }
            );
 
             modelBuilder.Entity<InputType>().HasData(
-                new InputType() { Num = 1, Gram = "GN", InputNameId = 1 },
-                new InputType() { Num = 2, Gram = "GP", InputNameId = 2 },
+                new InputType() { Num = 1, Gram = "GN", InputNameId = 1, },
+                new InputType() { Num = 2, Gram = "GP", InputNameId = 1 },
                 new InputType() { Num = 3, Gram = "GN", InputNameId = 3 }
             );
 
-            modelBuilder.Entity<Result>().HasData(
-                new Result() { Num = 1, ResultData = "Complete", InputTypeNum = 1 },
-                new Result() { Num = 2, ResultData = "Broth", InputTypeNum = 2 },
-                new Result() { Num = 3, ResultData = "Heating", InputTypeNum = 3 }
-            );
 
             // ---
             modelBuilder.Entity<InputName>()
                .HasOne(ipn => ipn.InputType)
-               .WithOne(ipt => ipt.InputName);
+               .WithMany(ipt => ipt.InputNames);
 
             modelBuilder.Entity<InputType>()
-                .HasOne(ipt => ipt.InputName)
+                .HasMany(ipt => ipt.InputNames)
                 .WithOne(ipn => ipn.InputType);
-            //---
-
-            modelBuilder.Entity<InputType>()
-              .HasOne(ipt => ipt.Result)
-              .WithOne(r => r.InputType);
-
-            modelBuilder.Entity<Result>()
-             .HasOne(r => r.InputType)
-             .WithOne(ipt => ipt.Result);
         }
     }
 

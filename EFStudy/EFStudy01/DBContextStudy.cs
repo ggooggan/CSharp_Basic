@@ -42,7 +42,7 @@ public class ApplicationDbContext : DbContext
         modelBuilder.Entity<Student>()
             .HasOne(s => s.Department) // Student 엔터티가 Department 엔터티와 일대다 관계 설정
             .WithMany(d => d.Students) // Department 엔터티가 Students 내비게이션 속성을 가지고 있음을 설정 (역방향 관계)
-            .HasForeignKey(s => s.DepartmentId); // 외래 키로 DepartmentId를 사용
+            .HasForeignKey(s => s.DepartmentId); // 외래 키로 DepartmentId를 사용 
     }
 }
 
@@ -52,11 +52,11 @@ public class DBConextStudy
     {
         using (var context = new ApplicationDbContext())
         {
-            //기존 DB가 존재할 경우 삭제
-            bool deleted = context.Database.EnsureDeleted();
+            ////기존 DB가 존재할 경우 삭제
+            //bool deleted = context.Database.EnsureDeleted();
 
-            //Model로 부터 DB를 만들고 필요한 SQL Script를 생성
-            bool created = context.Database.EnsureCreated();
+            ////Model로 부터 DB를 만들고 필요한 SQL Script를 생성
+            //bool created = context.Database.EnsureCreated();
 
 
             // 학과 추가
@@ -79,7 +79,7 @@ public class DBConextStudy
                 FirstName = "John",
                 LastName = "Doe",
                 Age = 220,
-                DepartmentId = department01.DepartmentID // 학생을 위에서 추가한 학과에 소속시킴
+                DepartmentId = department.DepartmentID // 학생을 위에서 추가한 학과에 소속시킴
             };
             context.Students.Add(student);
             context.Students.Add(student02);
