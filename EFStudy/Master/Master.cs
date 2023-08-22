@@ -14,14 +14,13 @@ namespace Master
         [Key]
         public int Num { get; set; }
 
-        public string InputData { get; set; }
+        public string? InputData { get; set; }
 
-        public InputType InputType { get; set; }
+        public InputType? InputType { get; set; }
 
-        [ForeignKey("Result")]
-        public int ResultFK { get; set; }
-
-        public Result Result { get; set; }
+        //[ForeignKey("Result")]
+        //public int ResultFK { get; set; }
+        //public Result Result { get; set; }
     }
 
     public class InputType
@@ -29,11 +28,13 @@ namespace Master
         [Key]
         public int Num { get; set; }
 
-        public string Gram { get; set; }
+        public string? Gram { get; set; }
 
         [ForeignKey(nameof(InputName))]
         public int InputNameId { get; set; }
-        public InputName InputName { get; set; }
+        public InputName? InputName { get; set; }
+
+        public Result Result { get; set; }
     }
 
     public class Result
@@ -41,11 +42,11 @@ namespace Master
         [Key]
         public int Num { get; set; }
 
-        public string ResultData { get; set; }
+        public string? ResultData { get; set; }
 
         [ForeignKey("InputType")]
         public int InputTypeNum { get; set; } // 외래키
-        public InputType InputType { get; set; } // 네비게이터
+        public InputType? InputType { get; set; } // 네비게이터
     }
 
     public class TotalClass : DbContext
@@ -63,11 +64,17 @@ namespace Master
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            //modelBuilder.Entity<InputName>().HasData(
+            //    new InputName() { Num = 1, InputData = "1", ResultFK = 1 },
+            //    new InputName() { Num = 2, InputData = "2", ResultFK = 3 },
+            //    new InputName() { Num = 3, InputData = "3", ResultFK = 2 }
+            //);
+
             modelBuilder.Entity<InputName>().HasData(
-                new InputName() { Num = 1, InputData = "1", ResultFK = 1 },
-                new InputName() { Num = 2, InputData = "2", ResultFK = 3 },
-                new InputName() { Num = 3, InputData = "3", ResultFK = 2 }
-            );
+               new InputName() { Num = 1, InputData = "1" },
+               new InputName() { Num = 2, InputData = "2" },
+               new InputName() { Num = 3, InputData = "3" }
+           );
 
             modelBuilder.Entity<InputType>().HasData(
                 new InputType() { Num = 1, Gram = "GN", InputNameId = 1 },
@@ -89,6 +96,8 @@ namespace Master
             //    .HasOne(r => r.InputType)
             //    .WithOne();
 
+
+            
         }
     }
 
