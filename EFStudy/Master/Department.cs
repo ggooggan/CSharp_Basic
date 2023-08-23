@@ -102,7 +102,15 @@ namespace YourNamespace
                 context.Database.EnsureDeleted();
                 context.Database.EnsureCreated();
 
-                
+                var department_ = context.Departments
+                        .Include(d => d.Students) // Students 내비게이션 속성 로드
+                        .FirstOrDefault(d => d.DepartmentID == 2);
+                var studentsInDepartment = department_.Students.ToList();
+
+                foreach (var value in studentsInDepartment)
+                {
+                    Console.WriteLine(value.StudentID.ToString());
+                }
             }
         }
     }
