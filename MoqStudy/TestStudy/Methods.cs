@@ -152,7 +152,6 @@ namespace TestStudy
             var a = mock1.Object;
             var b = a.GetCount();
 
-            Console.WriteLine(b);
         }
     }
 }
