@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33829.357
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KaburiCode", "KaburiCode\KaburiCode.csproj", "{896C3DB4-D23F-4420-9C09-A54153189742}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{896C3DB4-D23F-4420-9C09-A54153189742}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{896C3DB4-D23F-4420-9C09-A54153189742}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{896C3DB4-D23F-4420-9C09-A54153189742}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{896C3DB4-D23F-4420-9C09-A54153189742}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C9E29B39-0A1F-40EE-A2DA-0DB10258C36A}
+	EndGlobalSection
+EndGlobal
