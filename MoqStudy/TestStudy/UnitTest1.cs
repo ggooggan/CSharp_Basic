@@ -64,26 +64,33 @@ namespace TestStudy
         {
             var mock = new Mock<IFoo>();
 
-            //// any value
-            //mock.Setup(foo => foo.DoSomething(It.IsAny<string>())).Returns(true);
+            // any value
+            mock.Setup(foo => foo.DoSomething(It.IsAny<string>())).Returns(true);
 
-            //// any value passed in a `ref` parameter (requires Moq 4.8 or later):
-            //mock.Setup(foo => foo.Submit(ref It.Ref<Bar>.IsAny)).Returns(true);
+            // any value passed in a `ref` parameter (requires Moq 4.8 or later):
+            mock.Setup(foo => foo.Submit(ref It.Ref<Bar>.IsAny)).Returns(true);
 
-            //// matching Func<int>, lazy evaluated
-            //mock.Setup(foo => foo.Add(It.Is<int>(i => i % 2 == 0))).Returns(true);
+            // matching Func<int>, lazy evaluated
+            mock.Setup(foo => foo.Add(It.Is<int>(i => i % 2 == 0))).Returns(true);
 
-            //// matching ranges
+            // matching ranges
             //mock.Setup(foo => foo.Add(It.IsInRange<int>(0, 10, Range.Inclusive))).Returns(true);
 
             // matching regex
             mock.Setup(x => x.DoSomethingStringy(It.IsRegex("[a-d]+", RegexOptions.IgnoreCase))).Returns("foo");
 
             IFoo foo = mock.Object;
+            Bar _bar = new Bar();
+            Baz _baz = new Baz();
 
-            var a = foo.DoSomethingStringy("eeeeee");
+            var value01 = foo.DoSomething("anykey");
+            var value02 = foo.Submit(ref _bar);
+            var value03 = foo.Add(1);
+            var value04 = foo.Add(2);
+            var value05 = foo.DoSomethingStringy("aaaaaaaaaaaa");
+            var value06 = foo.DoSomethingStringy("eeeeeeeeeeeeeee");
 
-            Assert.Equals("foo", a);
+            Console.WriteLine("end");
         }
 
         [TestMethod]
@@ -124,6 +131,46 @@ namespace TestStudy
             var a = foo.DoSomething(1, "ping");
              
             Assert.IsTrue(a);
+        }
+
+        [TestMethod]
+        public void PropertiesTest()
+        {
+            var mock = new Mock<IFoo>();
+            var _mockObject = mock.Object;
+
+            mock.Setup(foo => foo.Name).Returns("bar");
+            var value01 = _mockObject.Name;
+
+            // auto-mocking hierarchies (a.k.a. recursive mocks)
+            mock.Setup(foo => foo.Bar.Baz.Name).Returns("baz");
+
+            // expects an invocation to set the value to "foo"
+            mock.SetupSet(foo => foo.Name = "foo");
+
+            //// or verify the setter directly
+            //mock.VerifySet(foo => foo.Name = "foo");
+
+            var value02 = _mockObject.Bar.Baz.Name;
+            var value03 = _mockObject.Name;
+
+            // start "tracking" sets/gets to this property
+            mock.SetupProperty(f => f.Name);
+            // alternatively, provide a default value for the stubbed property
+            mock.SetupProperty(f => f.Name, "foo_defaultName");
+
+            var foo = mock.Object;
+            // Initial value was stored
+            //Assert.("foo", foo.Name);
+            var value04 = foo.Name;
+
+            // New value set which changes the initial value
+            foo.Name = "bar";
+            //Assert.Equal("bar", foo.Name);
+            var value05 = foo.Name;
+
+            Console.WriteLine("");
+
         }
     }
 }
