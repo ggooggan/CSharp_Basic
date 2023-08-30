@@ -116,21 +116,39 @@ namespace TestStudy
 
             // access arguments for methods with multiple parameters
             mock.Setup(foo => foo.DoSomething(It.IsAny<int>(), It.IsAny<string>()))
-                .Callback<int, string>((i, s) => callArgs.Add(i.ToString()))
-                .Returns(true)
-                .Callback<int, string>((i, s) => callArgs.Add((i+100).ToString()));
+                .Callback<int, string>((i, s) => callArgs.Add(s))
+                .Returns(true);
 
+            var _mock = mock.Object;
+            var a = _mock.DoSomething(1, "asdfasdf");
 
+            Console.WriteLine(a);
             //// callbacks can be specified before and after invocation
             //mock.Setup(foo => foo.DoSomething("ping"))
             //    .Callback(() => Console.WriteLine("Before returns"))
             //    .Returns(true)
             //    .Callback(() => Console.WriteLine("After returns"));
 
-            IFoo foo = mock.Object;
-            var a = foo.DoSomething(1, "ping");
-             
-            Assert.IsTrue(a);
+            //// callbacks for methods with `ref` / `out` parameters are possible but require some work (and Moq 4.8 or later):
+            //delegate void SubmitCallback(ref Bar bar);
+
+            //mock.Setup(foo => foo.Submit(ref It.Ref<Bar>.IsAny))
+            //    .Callback(new SubmitCallback((ref Bar bar) => Console.WriteLine("Submitting a Bar!")));
+
+            //// returning different values on each invocation
+            //var mock = new Mock<IFoo>();
+            //var calls = 0;
+            //mock.Setup(foo => foo.GetCount())
+            //    .Callback(() => calls++)
+            //    .Returns(() => calls);
+            //// returns 0 on first invocation, 1 on the next, and so on
+            //Console.WriteLine(mock.Object.GetCount());
+
+            //// access invocation arguments and set to mock setup property
+            //mock.SetupProperty(foo => foo.Bar);
+            //mock.Setup(foo => foo.DoSomething(It.IsAny<string>()))
+            //    .Callback((string s) => mock.Object.Bar = s)
+            //    .Returns(true);
         }
 
         [TestMethod]
@@ -171,6 +189,23 @@ namespace TestStudy
 
             Console.WriteLine("");
 
+        }
+
+        [TestMethod]
+        public void EventTest()
+        {
+            var mock = new Mock<IFoo>();
+            var _mockObject = mock.Object;
+            _mockObject.MyEvent += (num, e) =>
+            {
+                Console.WriteLine($"num: {num} / boolen: {e}");
+            };
+
+            int foodValue = 42;
+            mock.Raise(m => m.MyEvent += null, 1, true);
+
+
+            Console.WriteLine("end");
         }
     }
 }

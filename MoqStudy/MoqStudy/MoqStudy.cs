@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 
 namespace MoqStudy
 {
+    public delegate void MyEventHandler(int i, bool b);
+
     public interface IFoo
     {
         Bar Bar { get; set; }
@@ -21,6 +23,8 @@ namespace MoqStudy
         bool Submit(ref Bar bar);
         int GetCount();
         bool Add(int value);
+
+        event MyEventHandler MyEvent;
     }
 
     public interface TestFoo
@@ -43,7 +47,7 @@ namespace MoqStudy
     {
         public MoqStudy()
         {
-            
+
         }
     }
 }
